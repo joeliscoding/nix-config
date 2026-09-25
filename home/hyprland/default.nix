@@ -1,0 +1,8 @@
+{ pkgs, inputs, ... }:
+
+{
+  xdg.configFile."hypr" = {
+    source = ./hypr;
+    recursive = true;
+  };
+}
