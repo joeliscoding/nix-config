@@ -27,6 +27,7 @@ in
   xdg.configFile."1Password/ssh/agent.toml".source = tomlFormat.generate "1password-ssh-agent.toml" {
     ssh-keys = [
       { vault = "Developer"; }
+      { vault = "Fachschaft"; }
     ];
   };
 }

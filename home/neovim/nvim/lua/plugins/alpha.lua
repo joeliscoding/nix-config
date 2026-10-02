@@ -21,7 +21,7 @@ return {
       dashboard.button("r", "  Browse src", ":e ~/.local/src/<CR>"),
       dashboard.button("s", "󰯂  Browse scripts", ":e ~/scripts/<CR>"),
       dashboard.button("c", "  Nix Config", ":e ~/nix-config/<CR>"),
-      dashboard.button("m", "  Mappings", ":e ~/.config/nvim/lua/config/mappings.lua<CR>"),
+      dashboard.button("m", "  Mappings", ":e ~/nix-config/home/nvim/lua/config/mappings.lua<CR>"),
       dashboard.button("p", "  Plugins", ":PlugInstall<CR>"),
       dashboard.button("q", "󰅙  Quit", ":q!<CR>"),
     }

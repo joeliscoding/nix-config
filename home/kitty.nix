@@ -9,7 +9,11 @@
       size = 12;
     };
 
+    shellIntegration.enableFishIntegration = true;
+
     settings = {
+      shell = "fish";
+
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";

@@ -7,11 +7,13 @@
     ./cursor.nix
     
     ./1password
+    ./fish.nix
     ./git.nix
     ./hyprland
     ./kitty.nix
     ./neovim
     ./quickshell
+    ./starship.nix
   ];
 
   home.username = "joel";

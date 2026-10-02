@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./hardware
-    ./system
+    ./touchscreen.nix
   ];
 }
