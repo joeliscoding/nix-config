@@ -11,7 +11,6 @@
     fuzzel
     git
     kitty
-    spotify
     wl-clipboard
     yazi
   ];

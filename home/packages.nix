@@ -7,6 +7,7 @@
     firefox
     nautilus
     slack
+    spotify
     vesktop
   ];
 }

@@ -1,8 +1,13 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   services.upower.enable = true;
   powerManagement.enable = true;
+
+  services.thermald.enable = true;
+  systemd.services.thermald.serviceConfig.ExecStart = lib.mkForce
+    "${pkgs.thermald}/sbin/thermald --no-daemon --dbus-enable";
+
 
   services.tlp = {
     enable = true;
