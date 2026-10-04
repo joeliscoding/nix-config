@@ -1,0 +1,11 @@
+[config]
+
+[templates.kitty]
+input_path = './templates/kitty-colors.conf'
+output_path = '~/.cache/matugen/kitty/matugen.conf'
+post_hook = "pkill -USR1 kitty"
+
+[templates.quickshell]
+input_path = './templates/quickshell-colors.qml'
+output_path = '~/.cache/matugen/quickshell/matugen.qml'
+

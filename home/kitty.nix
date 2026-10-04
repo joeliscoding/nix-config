@@ -25,5 +25,10 @@
       window_padding_width = 10;
       background_opacity = 0.8;
     };
+
+    extraConfig = ''
+      include ~/.cache/matugen/kitty/matugen.conf
+    '';
+
   };
 }

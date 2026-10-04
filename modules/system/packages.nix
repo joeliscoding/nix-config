@@ -13,5 +13,6 @@
     kitty
     spotify
     wl-clipboard
+    yazi
   ];
 }

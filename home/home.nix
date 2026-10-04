@@ -11,9 +11,11 @@
     ./git.nix
     ./hyprland
     ./kitty.nix
+    ./matugen
     ./neovim
     ./quickshell
     ./starship.nix
+    ./yazi.nix
   ];
 
   home.username = "joel";
