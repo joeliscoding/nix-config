@@ -10,6 +10,13 @@
         signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG35YTvacglyHhEY2YEars+6kvqmwr78/2sA79rZx3SH";
       };
 
+      gpg = {
+        format = "ssh";
+      };
+      commit = {
+        gpgsign = true;
+      };
+
       init.defaultBranch = "main";
     };
   };
