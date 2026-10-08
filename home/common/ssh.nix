@@ -5,9 +5,12 @@
     enable = true;
     enableDefaultConfig = false;
 
+    includes = [ "~/.ssh/config.local" ];
+
     settings."*" = {
-      # default ssh config
-      ForwardAgent = false;
+      SetEnv = {
+        TERM = "xterm-256color";
+      };
       AddKeysToAgent = "no";
       Compression = false;
       ServerAliveInterval = 0;

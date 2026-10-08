@@ -14,13 +14,13 @@ in
   programs.ssh = {
     enable = true;
     #enableDefaultConfig = false;
-    extraConfig = ''
-    Host *
-      IdentityAgent ${onePassPath}
-    '';
-    #settings = {
-    #  "Host *" = "IdentityAgent ${onePassPath}"
-    #};
+    #extraConfig = ''
+    #Host *
+    #  IdentityAgent ${onePassPath}
+    #'';
+    settings."*" = {
+      "IdentityAgent" = onePassPath;
+    };
   };
 
 

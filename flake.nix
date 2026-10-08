@@ -15,57 +15,62 @@
     nixpkgs,
     home-manager,
     ...
-  }@inputs: {
-    nixosConfigurations = {
-      joel-surface = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/joel-surface
+  }@inputs: let
+    system = "x86_64-linux";
 
-          ./modules/common
-          ./modules/desktop
-          
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.joel.imports = [
-              ./home/common
-              ./home/desktop
-            ];
-          }
-        ];
-      };
+    homeModules = {
+      joel-surface = [
+        ./home/common
+        ./home/desktop
+      ];
 
-      ninjago = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/ninjago
-
-          ./modules/common
-          ./modules/services
-          
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.joel.imports = [
-              ./home/common
-            ];
-          }
-        ];
-      };
+      ninjago = [
+        ./home/common
+      ];
     };
 
-    homeConfigurations."joel" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
+    mkHome = host:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = { inherit inputs; };
+        modules = homeModules.${host};
       };
-      extraSpecialArgs = { inherit inputs; };
-      modules = [ ./home/home.nix ];
+
+    mkHost = host: extraModules:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules =
+          [
+            ./hosts/${host}
+            ./modules/common
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users.joel.imports = homeModules.${host};
+            }
+          ]
+          ++ extraModules;
+      };
+  in {
+    nixosConfigurations = {
+      joel-surface = mkHost "joel-surface" [
+        ./modules/desktop
+      ];
+
+      ninjago = mkHost "ninjago" [
+        ./modules/services
+      ];
+    };
+
+    homeConfigurations = {
+      "joel@joel-surface" = mkHome "joel-surface";
+      "joel@ninjago" = mkHome "ninjago";
     };
   };
 }
