@@ -2,20 +2,9 @@
 
 {
   imports = [
-    ./packages.nix
-    
-    ./cursor.nix
-    
-    ./1password
     ./fish.nix
     ./git.nix
-    ./hyprland
-    ./kitty.nix
-    ./matugen
-    ./neovim
-    ./quickshell
-    ./starship.nix
-    ./yazi.nix
+    ./ssh.nix
   ];
 
   home.username = "joel";

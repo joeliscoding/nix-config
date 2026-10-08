@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
- 
   programs.fish = {
     enable = true;
 
@@ -19,10 +18,6 @@
       ".." = "cd ..";
       "..." = "cd ../..";
     };
-
-    plugins = [
-      #{ name = "grc"; src = pkgs.fishPlugins.grc.src; }
-    ];
   };
 }
 

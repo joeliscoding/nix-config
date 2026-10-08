@@ -11,6 +11,7 @@
     fuzzel
     git
     kitty
+    wiremix
     wl-clipboard
     yazi
   ];

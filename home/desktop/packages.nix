@@ -6,8 +6,10 @@
     fastfetch
     firefox
     nautilus
+    signal-desktop
     slack
     spotify
     vesktop
+    vscodium
   ];
 }

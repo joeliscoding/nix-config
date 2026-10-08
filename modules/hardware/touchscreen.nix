@@ -1,5 +1,0 @@
-{ ... }:
-
-{
-  services.iptsd.enable = true;
-}
