@@ -5,5 +5,6 @@
     ./beszel.nix
     ./caddy.nix
     ./pocket-id.nix
+    ./syncthing.nix
   ];
 }
