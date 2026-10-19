@@ -7,35 +7,28 @@ import QtQuick
 Singleton {
     id: root
 
-    // wifi-devices (empty string for auto detection)
+    // devices (empty string = none detected)
     property string wifiDevice: ""
     property string ethernetDevice: ""
 
-    // wifi
     property bool wifiEnabled: false
-    property var activeWifi: null   // { ssid, rssi, signalStrength } or null
+    property var activeWifi: null   // { ssid, rssi } or null
 
-    // ethernet
-    property bool ethernetConnected: ethernetDevice !== ""
-
+    readonly property bool ethernetConnected: ethernetDevice !== ""
     readonly property bool connected: ethernetConnected || activeWifi !== null
     readonly property string connectionType: ethernetConnected ? "ethernet" : (activeWifi ? "wifi" : "none")
 
     function getIcon(): string {
         if (ethernetConnected) return "ethernet"
-        if (activeWifi) return wifiIcon(activeWifi)
+        if (activeWifi) {
+            const rssi = activeWifi.rssi
+            if (rssi > -70) return "wifi-excellent"
+            if (rssi > -80) return "wifi-moderate"
+            if (rssi > -90) return "wifi-weak"
+            return "wifi-zero"
+        }
         if (!wifiEnabled) return "wifi-disabled"
         return "offline"
-    }
-
-    function wifiIcon(wifiNetwork): string {
-        const s = wifiNetwork?.signalStrength ?? 0
-
-        // should be similar to macOS
-        if (s >= 0.66) return "wifi-excellent"
-        if (s >= 0.33) return "wifi-moderate"
-        if (s > 0) return "wifi-weak"
-        return "wifi-zero"
     }
 
     function setWifiEnabled(enabled: bool) {
@@ -44,18 +37,13 @@ Singleton {
         toggle.running = true
     }
 
-    // RSSI (dBm) -> 0..1  (-60 dBm ≈ 0.5, -70 dBm ≈ 0.33, -90 dBm = 0)
-    function rssiToStrength(rssi: int): real {
-        return Math.max(0, Math.min(1, (rssi + 90) / 60))
-    }
-
     function parse(text: string) {
         const kv = {}
         let eth = ""
         let wifi = ""
 
         for (const raw of text.split("\n")) {
-            // remove ANSI color codes
+            // strip ANSI color codes
             const line = raw.replace(/\x1b\[[0-9;]*m/g, "").trim()
 
             if (line.startsWith("@eth="))  { eth = line.slice(5);  continue }
@@ -70,12 +58,10 @@ Singleton {
         wifiEnabled = kv["Powered"] === "on"
 
         const ssid = kv["Connected network"]
-        if (wifi !== "" && kv["State"] === "connected" && ssid) {
-            const rssi = parseInt(kv["RSSI"] ?? "-100")
-            activeWifi = { ssid: ssid, rssi: rssi, signalStrength: rssiToStrength(rssi) }
-        } else {
+        if (wifi !== "" && kv["State"] === "connected" && ssid)
+            activeWifi = { ssid: ssid, rssi: parseInt(kv["RSSI"] ?? "-100") }
+        else
             activeWifi = null
-        }
     }
 
     Process {
@@ -118,4 +104,3 @@ Singleton {
         onTriggered: if (!poll.running) poll.running = true
     }
 }
-
