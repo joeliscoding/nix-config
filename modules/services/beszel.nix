@@ -5,6 +5,12 @@
     pkgs.beszel
   ];
 
+  sops.secrets."beszel/env" = {
+    sopsFile = ../../secrets/beszel.env;
+    format = "dotenv";
+    key = "";
+  };
+
   services.beszel = {
     hub = {
       enable = true;
@@ -17,7 +23,7 @@
 
     agent = {
       enable = true;
-      environmentFile = "/etc/secrets/beszel/env";   
+      environmentFile = config.sops.secrets."beszel/env".path;
     };
   };
 }
