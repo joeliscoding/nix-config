@@ -1,9 +1,9 @@
 { pkgs, config, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.beszel
-  ];
+  services.caddy.virtualHosts."beszel.blauerninja.de".extraConfig = ''
+    reverse_proxy http://127.0.0.1:8090
+  '';
 
   sops.secrets."beszel/env" = {
     sopsFile = ../../secrets/beszel.env;
