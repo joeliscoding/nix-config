@@ -25,6 +25,7 @@ in
       OAUTH_PROVIDERS_POCKETID_REDIRECTURL = "https://${authHost}/api/oauth/callback/pocketid";
       OAUTH_PROVIDERS_POCKETID_SCOPES = "openid email profile groups";
       OAUTH_AUTOREDIRECT = "pocketid";
+      UI_BACKGROUNDIMAGE = "https://${idHost}/api/application-images/background";
     };
   };
 

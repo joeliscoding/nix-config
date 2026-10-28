@@ -13,6 +13,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    degoog = {
+      url = "github:degoog-org/degoog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    joeliscoding-website.url = "github:joeliscoding/website";
   };
 
   outputs = {
@@ -20,6 +27,8 @@
     nixpkgs,
     home-manager,
     sops-nix,
+    degoog,
+    joeliscoding-website,
     ...
   }@inputs: let
     system = "x86_64-linux";
@@ -74,6 +83,7 @@
 
       ninjago = mkHost "ninjago" [
         ./modules/services
+        degoog.nixosModules.default
       ];
     };
 

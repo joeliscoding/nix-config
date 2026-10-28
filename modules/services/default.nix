@@ -4,9 +4,11 @@
   imports = [
     ./beszel.nix
     ./caddy.nix
+    ./degoog.nix
     ./pocket-id.nix
-    ./searx.nix
+    ./stirling-pdf.nix
     ./syncthing.nix
     ./tinyauth.nix
+    ./website.nix
   ];
 }
