@@ -6,5 +6,6 @@
     ./gnupg.nix
     ./sops.nix
     ./tailscale.nix
+    ./users.nix
   ];
 }

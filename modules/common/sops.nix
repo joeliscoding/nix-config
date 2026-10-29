@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   sops = {
@@ -7,4 +7,8 @@
 
     age.keyFile = "/home/joel/.config/sops/age/keys.txt";
   };
+
+  environment.systemPackages = with pkgs; [
+    sops
+  ];
 }

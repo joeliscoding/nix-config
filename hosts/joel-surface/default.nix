@@ -57,13 +57,6 @@
     clean.extraArgs = "--keep 5 --keep-since 7d";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."joel" = {
-    isNormalUser = true;
-    description = "joel";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

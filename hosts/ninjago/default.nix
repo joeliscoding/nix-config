@@ -26,14 +26,9 @@
   };
 
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.joel = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG35YTvacglyHhEY2YEars+6kvqmwr78/2sA79rZx3SH joel"
-    ];
-  };
+  users.users.joel.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG35YTvacglyHhEY2YEars+6kvqmwr78/2sA79rZx3SH joel"
+  ];
 
   environment.systemPackages = with pkgs; [
     git
