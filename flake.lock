@@ -130,11 +130,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793179043,
-        "narHash": "sha256-4H4IKWhtqiR2zZwoQts/pWtabvM5r4p4RSxYSLYIl3E=",
+        "lastModified": 1793355148,
+        "narHash": "sha256-O6QKN2PsaG2N0q2ZP3WKwvtnnh8m5ETaSAYO1ZtgMIM=",
         "owner": "joeliscoding",
         "repo": "website",
-        "rev": "d46c7b541c778eb1c8507bb693a2fe2c7764570c",
+        "rev": "1adeb66ff015831732f0adb60cabbeb040afa4b1",
         "type": "github"
       },
       "original": {
