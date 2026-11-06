@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 let
   rommHost = "romm.blauerninja.de";
@@ -21,6 +21,7 @@ in
     })
   ];
 
+  systemd.services.romm-worker.serviceConfig.ExecStart = lib.mkForce "${config.services.romm.package}/bin/romm-worker scans";
 
   sops.secrets."romm/env" = {
     sopsFile = ../../secrets/romm.env;
@@ -40,6 +41,7 @@ in
       OIDC_PROVIDER = "pocket-id";
       OIDC_REDIRECT_URI = "https://${rommHost}/api/oauth/openid";
       OIDC_SERVER_APPLICATION_URL = "https://${idHost}";
+      DISABLE_USERPASS_LOGIN = "true";
     };
   };
 
