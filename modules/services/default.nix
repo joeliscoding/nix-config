@@ -6,7 +6,7 @@
     ./caddy.nix
     ./degoog.nix
     ./pocket-id.nix
-    #./romm.nix # waiting for https://github.com/NixOS/nixpkgs/pull/580640 to get merged
+    ./romm.nix
     ./stirling-pdf.nix
     ./syncthing.nix
     ./tinyauth.nix

@@ -5,6 +5,23 @@ let
   idHost = "id.blauerninja.de";
 in
 {
+  # remove when nixpkgs pr #580640 is merged
+  nixpkgs.overlays = [
+    (final: prev: {
+      romm = prev.romm.overrideAttrs (old: {
+        passthru = old.passthru // {
+          pythonEnv = old.passthru.pythonEnv.override (args: {
+            extraLibs = args.extraLibs ++ [
+              final.python3.pkgs.httpx2
+              final.python3.pkgs.apprise
+            ];
+          });
+        };
+      });
+    })
+  ];
+
+
   sops.secrets."romm/env" = {
     sopsFile = ../../secrets/romm.env;
     format = "dotenv";
